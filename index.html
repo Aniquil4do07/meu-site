@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criação de Contrato</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+      }
+
+      body {
+        min-height: 100vh;
+        background-color: #FFF0F6;
+        padding: 2rem;
+        margin: 0;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        border: 1px solid #FFC0CB;
+        border-radius: 8px;
+        padding: 2rem;
+        background-color: #FFFFFF;
+      }
+
+      h1 {
+        text-align: center;
+        color: #FF69B4;
+        margin-bottom: 1rem;
+      }
+
+      form {
+        display: grid;
+        gap: 1rem;
+      }
+
+      input, textarea {
+        padding: 0.5rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        width: 100%;
+      }
+
+      textarea {
+        height: 80px;
+      }
+
+      button {
+        padding: 0.5rem;
+        background-color: #FF69B4;
+        color: #FFFFFF;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      pre {
+        background-color: #f9f9f9;
+        padding: 1rem;
+        border-radius: 4px;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+      }
+
+      .contract-output {
+        text-align: center;
+        margin-top: 1rem;
+      }
+    </style>
+    <script>
+      function handleSubmit(event) {
+        event.preventDefault();
+
+        const formData = new FormData(event.target);
+        const contratante = formData.get("contratante");
+        const cpf = formData.get("cpf");
+        const rg = formData.get("rg");
+        const horario = formData.get("horario");
+        const endereco = formData.get("endereco");
+        const estacoes = formData.get("estacoes");
+        const dataEvento = formData.get("dataEvento");
+        const valorContrato = formData.get("valorContrato");
+        const valorPago = formData.get("valorPago");
+        const dataHoje = formData.get("dataHoje");
+        const duracaoEvento = formData.get("duracaoEvento");
+
+        const contractTemplate = `
+              CONTRATO DE SERVIÇOS
+   Pelo presente instrumento particular, as partes abaixo especificadas, de um lado, Erica Raquel Pereira Moreira portadora do CPF: 105.474.147-65 e RG: 020.634.360-0,
+   residente na Rua Tasso Blaso (Número:1020), doravante denominada simplesmente CONTRATADA, responsável pela R&B estações, e de outro lado, ${contratante}
+   portador(a) do CPF/CNPJ: ${cpf} e RG: ${rg}, residente na ${endereco}, denominado simplesmente CONTRATANTE.
+   O presente instrumento tem por objetivo e prestação de serviços de ${estacoes} de acordo com as especificações constantes deste contrato, na data de ${dataEvento}.
+   O evento se realizará no endereço abaixo: 
+   ${endereco}
+   Horário: ${horario}
+   Duração: Até ${duracaoEvento}, mediante a demanda
+   Contratam, sob as condições seguintes: 
+   – O valor do serviço fica estabelecido em R$ ${valorContrato}, sendo pago R$ ${valorPago} no ato do contrato, o restante pago no dia do evento, no ato da chegada da equipe.
+   Em caso de intenção de mudança na data do evento, a mesma só ocorrerá se houver disponibilidade por parte do CONTRATADO, caso não haja essa disponibilidade o CONTRATADO estará isento
+   de quaisquer responsabilidades e penalidades legais.
+   Vale ressaltar que o CONTRATADO não se responsabilizará por nenhum tipo de inconsistência e/ou precariedade referente a sua localidade de trabalho, e que as estações são complementares
+   às festas e eventos, sendo descabida toda e qualquer reclamação perante a alta demanda das mesmas, uma vez que estejam exercendo o papel de prato principal.
+   Todos e quaisquer danos materiais que lesem o CONTRATADO, sofridos mediante precariedade da localidade de trabalho, inconsistência/sobrecarga elétrica ou desinformação serão de responsabilidade
+   do CONTRATANTE, estando o mesmo incumbido a arcar com as taxas de manutenção dos maquinários, caso não haja a possibilidade de conserto, a reposição do objeto danificado por outro novo
+   de mesma marca e características.
+   – O valor do sinal para reserva da data não será devolvido caso o CONTRATANTE cancele o evento.
+   E por estarem CONTRATADO e CONTRATANTE de pleno acordo com o disposto neste instrumento particular, o assinam abaixo, e em duas vias.
+
+   Rio de Janeiro, ${dataHoje}
+
+   CONTRATADO: Erica Raquel Pereira Moreira
+
+   CONTRATANTE: ${contratante}
+ `;
+
+        const contractOutput = document.getElementById("contractOutput");
+        contractOutput.textContent = contractTemplate;
+      }
+
+      function resetContract() {
+        document.getElementById("contractForm").reset();
+        document.getElementById("contractOutput").textContent = "";
+      }
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Criação de Contrato</h1>
+      <form id="contractForm" onsubmit="handleSubmit(event)">
+        <input type="text" name="contratante" placeholder="Nome do(a) contratante" required />
+        <input type="text" name="cpf" placeholder="Documento CPF do(a) contratante" required />
+        <input type="text" name="rg" placeholder="Documento RG do(a) contratante" required />
+        <input type="text" name="horario" placeholder="Horário do evento (00:00hrs)" required />
+        <input type="text" name="endereco" placeholder="Endereço do evento" required />
+        <textarea name="estacoes" placeholder="Estações contratadas" required></textarea>
+        <input type="text" name="dataEvento" placeholder="Data do evento (dd/mm/aa)" required />
+        <input type="text" name="valorContrato" placeholder="Valor do contrato (R$)" required />
+        <input type="text" name="valorPago" placeholder="Valor pago no ato do contrato (R$)" required />
+        <input type="text" name="dataHoje" placeholder="Data de hoje (por extenso)" required />
+        <input type="text" name="duracaoEvento" placeholder="Duração do evento (00h)" required />
+        <button type="submit">Gerar Contrato</button>
+      </form>
+      <div class="contract-output">
+        <pre id="contractOutput"></pre>
+        <button onclick="resetContract()" style="display: block; margin: 1rem auto">Criar Novo Contrato</button>
+      </div>
+    </div>
+  </body>
+</html>
