@@ -38,6 +38,7 @@ export default function ContractCreation() {
    Duração: Até ${formData.duracaoEvento}, mediante a demanda
    Contratam, sob as condições seguintes: 
    – O valor do serviço fica estabelecido em R$ ${formData.valorContrato}, sendo pago R$ ${formData.valorPago} no ato do contrato, o restante pago no dia do evento, no ato da chegada da equipe.
+   Os serviços só terão início após a confirmação do pagamento.
    Em caso de intenção de mudança na data do evento, a mesma só ocorrerá se houver disponibilidade por parte do CONTRATADO, caso não haja essa disponibilidade o CONTRATADO estará isento
    de quaisquer responsabilidades e penalidades legais.
    Vale ressaltar que o CONTRATADO não se responsabilizará por nenhum tipo de inconsistência e/ou precariedade referente a sua localidade de trabalho, e que as estações são complementares
